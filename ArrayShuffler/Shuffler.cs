@@ -13,17 +13,17 @@
         /// The cryptographically secure random number generator.
         /// </summary>
         /// <remarks>It provides better random numbers than System.Random's substractive pseudo-random number generator.</remarks>
-        private static readonly RandomNumberGenerator _randomNumberGenerator = RandomNumberGenerator.Create();
+        private static readonly RandomNumberGenerator RandomNumberGenerator = RandomNumberGenerator.Create();
 
         /// <summary>
         /// Shuffles the given array.
         /// </summary>
         /// <param name="array">The array to shuffle.</param>
-        public static void ShuffleArray(int[] array)
+        public static void ShuffleArray<T>(T[] array)
         {
             if (array == null)
             {
-                throw new ArgumentNullException("array", "Array cannot be null.");
+                throw new ArgumentNullException(nameof(array), "Array cannot be null.");
             }
 
             if (array.Length < 2)
@@ -72,7 +72,7 @@
             do
             {
                 var b = new byte[4];
-                _randomNumberGenerator.GetBytes(b);
+                RandomNumberGenerator.GetBytes(b);
                 var i = BitConverter.ToUInt32(b, 0);
                 var d = (double)i / 0xffffffff;
                 r = (int)(minValue + (d * difference));
@@ -89,7 +89,7 @@
         /// <param name="i">The index of the first element.</param>
         /// <param name="j">The index of the second element.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Swap(int[] array, int i, int j)
+        private static void Swap<T>(T[] array, int i, int j)
         {
             var tmp = array[i];
             array[i] = array[j];

@@ -31,7 +31,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void ShufflingNullArrayThrowsException()
         {
-            Shuffler.ShuffleArray(null);
+            Shuffler.ShuffleArray<int>(null);
         }
 
         [TestMethod]
